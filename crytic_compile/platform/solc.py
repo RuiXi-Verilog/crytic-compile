@@ -467,8 +467,8 @@ def _run_solc(
     ):
         raise InvalidCompilation(f"{filename} does not exist (are you in the correct directory?)")
 
-    if not filename.endswith(".sol"):
-        raise InvalidCompilation("Incorrect file format")
+    # if not filename.endswith(".sol"):
+    #     raise InvalidCompilation("Incorrect file format")
 
     compilation_unit.compiler_version = CompilerVersion(
         compiler="solc", version=get_version(solc, env), optimized=is_optimized(solc_arguments)
