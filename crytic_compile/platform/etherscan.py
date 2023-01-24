@@ -33,7 +33,7 @@ ETHERSCAN_BASE_BYTECODE = "https://%s/address/%s#code"
 
 SUPPORTED_NETWORK = {
     # Key, (prefix_base, perfix_bytecode)
-    "mainet:": (".etherscan.io", "etherscan.io"),
+    "mainnet:": (".etherscan.io", "etherscan.io"),
     "optim:": ("-optimistic.etherscan.io", "optimistic.etherscan.io"),
     "ropsten:": ("-ropsten.etherscan.io", "ropsten.etherscan.io"),
     "kovan:": ("-kovan.etherscan.io", "kovan.etherscan.io"),
