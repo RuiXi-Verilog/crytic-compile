@@ -18,6 +18,7 @@ from crytic_compile.platform import all_platforms, solc_standard_json
 from crytic_compile.platform.abstract_platform import AbstractPlatform
 from crytic_compile.platform.all_export import PLATFORMS_EXPORT
 from crytic_compile.platform.solc import Solc
+from crytic_compile.platform.solc_standard_json import SolcStandardJson
 from crytic_compile.platform.standard import export_to_standard
 from crytic_compile.platform.truffle import Truffle
 from crytic_compile.utils.naming import Filename
