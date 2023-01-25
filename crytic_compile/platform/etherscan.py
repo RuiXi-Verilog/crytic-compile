@@ -347,15 +347,15 @@ class Etherscan(AbstractPlatform):
 
         compilation_unit = CompilationUnit(crytic_compile, contract_name)
 
-        compilation_unit.compiler_version = CompilerVersion(
-            compiler=kwargs.get("solc", "solc"),
-            version=compiler_version,
-            optimized=optimization_used,
-            optimize_runs=optimize_runs,
-        )
-        compilation_unit.compiler_version.look_for_installed_version()
+        # compilation_unit.compiler_version = CompilerVersion(
+        #     compiler=kwargs.get("solc", "solc"),
+        #     version=compiler_version,
+        #     optimized=optimization_used,
+        #     optimize_runs=optimize_runs,
+        # )
+        # compilation_unit.compiler_version.look_for_installed_version()
 
-        solc_standard_json.standalone_compile(filenames, compilation_unit, working_dir=working_dir)
+        solc_standard_json.standalone_compile(filenames, compilation_unit, working_dir=working_dir, solc=kwargs.get("solc", "solc"))
 
     @staticmethod
     def is_supported(target: str, **kwargs: str) -> bool:
