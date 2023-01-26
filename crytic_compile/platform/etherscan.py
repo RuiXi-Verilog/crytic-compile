@@ -15,6 +15,7 @@ from crytic_compile.compilation_unit import CompilationUnit
 from crytic_compile.compiler.compiler import CompilerVersion
 from crytic_compile.platform import solc_standard_json
 from crytic_compile.platform.abstract_platform import AbstractPlatform
+from crytic_compile.platform.solc import get_version
 from crytic_compile.platform.exceptions import InvalidCompilation
 from crytic_compile.platform.types import Type
 from crytic_compile.utils.naming import Filename
@@ -315,9 +316,9 @@ class Etherscan(AbstractPlatform):
         # Assert to help mypy
         assert isinstance(result["CompilerVersion"], str)
 
-        compiler_version = re.findall(
-            r"\d+\.\d+\.\d+", _convert_version(result["CompilerVersion"])
-        )[0]
+        # compiler_version = re.findall(
+        #     r"\d+\.\d+\.\d+", _convert_version(result["CompilerVersion"])
+        # )[0]
 
         optimization_used: bool = result["OptimizationUsed"] == "1"
 
@@ -347,15 +348,17 @@ class Etherscan(AbstractPlatform):
 
         compilation_unit = CompilationUnit(crytic_compile, contract_name)
 
-        # compilation_unit.compiler_version = CompilerVersion(
-        #     compiler=kwargs.get("solc", "solc"),
-        #     version=compiler_version,
-        #     optimized=optimization_used,
-        #     optimize_runs=optimize_runs,
-        # )
+        compiler = kwargs.get("solc", "solc")
+        version = get_version(compiler)
+        compilation_unit.compiler_version = CompilerVersion(
+            compiler=compiler,
+            version=version,
+            optimized=optimization_used,
+            optimize_runs=optimize_runs,
+        )
         # compilation_unit.compiler_version.look_for_installed_version()
 
-        solc_standard_json.standalone_compile(filenames, compilation_unit, working_dir=working_dir, solc=kwargs.get("solc", "solc"))
+        solc_standard_json.standalone_compile(filenames, compilation_unit, working_dir=working_dir)
 
     @staticmethod
     def is_supported(target: str, **kwargs: str) -> bool:
