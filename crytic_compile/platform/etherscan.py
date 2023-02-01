@@ -349,7 +349,7 @@ class Etherscan(AbstractPlatform):
         compilation_unit = CompilationUnit(crytic_compile, contract_name)
 
         compiler = kwargs.get("solc", "solc")
-        version = get_version(compiler)
+        version = get_version(compiler, None)
         compilation_unit.compiler_version = CompilerVersion(
             compiler=compiler,
             version=version,
